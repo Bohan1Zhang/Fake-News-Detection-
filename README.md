@@ -1,8 +1,10 @@
 # Midterm Report
+## 5-minute presentation
+Video link:*https://www.youtube.com/watch?v=gLnqWveHa7c*
 ## Preliminary Visualizations
 Analyzed the token length distribution of the news dataset to determine a suitable maximum sequence length for model input. Most articles are under 512 tokens, which guided my tokenizer setting. Due to processing time constraints, the word cloud was not generated at this stage.
 ## Data Processing
-Combined the True.csv and Fake.csv files from Kaggle, added binary labels (1 = fake, 0 = real), shuffled the data to avoid label bias, and removed duplicates. The dataset was then tokenized using the bert-base-uncased tokenizer with max_length=512.
+Combined the True.csv and Fake.csv files from Kaggle, added binary labels (0 = fake, 1 = real), shuffled the data to avoid label bias, and removed duplicates. The dataset was then tokenized using the bert-base-uncased tokenizer with max_length=512.
 ## Data Modeling Methods
 Fine-tuned a DistilBERT model using the Hugging Face Trainer API. The model was trained on 1000 examples for efficiency, with early stopping enabled. Evaluation was performed on a held-out validation set using standard classification metrics.
 ## Preliminary Results
