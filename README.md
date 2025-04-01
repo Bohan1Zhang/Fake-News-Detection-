@@ -1,3 +1,27 @@
+# Midterm Report
+## Preliminary Visualizations
+Analyzed the token length distribution of the news dataset to determine a suitable maximum sequence length for model input. Most articles are under 512 tokens, which guided my tokenizer setting. Due to processing time constraints, the word cloud was not generated at this stage.
+## Data Processing
+Combined the True.csv and Fake.csv files from Kaggle, added binary labels (1 = fake, 0 = real), shuffled the data to avoid label bias, and removed duplicates. The dataset was then tokenized using the bert-base-uncased tokenizer with max_length=512.
+## Data Modeling Methods
+Fine-tuned a DistilBERT model using the Hugging Face Trainer API. The model was trained on 1000 examples for efficiency, with early stopping enabled. Evaluation was performed on a held-out validation set using standard classification metrics.
+## Preliminary Results
+The model achieved perfect classification on the validation set:
+
+Accuracy: 100%
+
+Confusion Matrix:
+
+- Fake news correctly predicted as fake: 102
+
+- Real news correctly predicted as real: 98
+
+No misclassifications observed
+
+These early results show strong performance of the DistilBERT-based classifier and justify further scaling of training size and evaluation.
+
+
+
 # Fake-News-Detection-
 ![Fake News](./png_file/news.png)
 ## Description of the project
@@ -9,7 +33,7 @@ The rapid spread of misinformation has become a pressing issue in the digital ag
 3. Implement a visualization dashboard to illustrate key insights from the dataset, such as the most common misleading words or sources.
 
 ## Data Collection & Source
-- I will use the Fake News Prediction Dataset from **Kaggle**, which contains labeled news articles. Dataset link:*https://www.kaggle.com/datasets/rajatkumar30/fake-news*
+- I will use the Fake News Prediction Dataset from **Kaggle**, which contains labeled news articles. Dataset link:*https://www.kaggle.com/datasets/jainpooja/fake-news-detection?select=True.csv*
 ### Dataset details:
 - Columns: Title, text content, label (1 = Fake, 0 = Real)
 - Size: 10,000 news articles
@@ -30,3 +54,5 @@ I will experiment with two deep learning-based NLP models:
 ### Evaluation Metrics:
 - Accuracy, Precision, Recall, F1-score
 - ROC-AUC Curve to assess classification quality
+
+
