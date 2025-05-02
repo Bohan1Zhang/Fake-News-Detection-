@@ -1,0 +1,31 @@
+# Makefile.win (for Windows)
+# This Makefile performs the same setup and test operations as the Linux version.
+
+ENV_NAME=venv
+
+install:
+	# Create virtual environment named 'venv'
+	python -m venv $(ENV_NAME)
+	# Upgrade pip and install dependencies
+	$(ENV_NAME)\Scripts\pip install --upgrade pip
+	$(ENV_NAME)\Scripts\pip install -r requirements.txt
+	# Register the environment as a Jupyter kernel
+	$(ENV_NAME)\Scripts\python -m ipykernel install --user --name=$(ENV_NAME) --display-name="Python ($(ENV_NAME))"
+
+notebook:
+	# Launch Jupyter Notebook using venv's kernel
+	$(ENV_NAME)\Scripts\jupyter notebook
+
+freeze:
+	# Save current package versions to requirements.txt
+	$(ENV_NAME)\Scripts\pip freeze > requirements.txt
+
+clean:
+	# Delete all __pycache__ directories
+	del /s /q __pycache__ 2>nul || exit 0
+
+test:
+	# Run model loading test in venv
+	$(ENV_NAME)\Scripts\python test_model.py
+
+
